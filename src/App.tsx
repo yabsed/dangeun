@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import ChatList from './pages/ChatList';
 import ChatRoom from './pages/ChatRoom';
 import MyCarrot from './pages/MyCarrot';
+import NeighborhoodMap from './pages/NeighborhoodMap';
 import './styles/common.css';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/dangun/jobs" replace />} />
           <Route path="/dangun/jobs" element={<Home/>}/>
+          <Route path="/dangun/map" element={<NeighborhoodMap/>}/>
           <Route path="/dangun/posts/:id" element={<PostDetail/>}/>
           <Route path="/dangun/chat" element={<ChatList />} />
           <Route path="/dangun/chat/:chatId" element={<ChatRoom />} />
