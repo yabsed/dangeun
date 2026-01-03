@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import './styles/login.css';
 
 const BASE_URL = 'https://api-internhasha.wafflestudio.com';
 
@@ -24,7 +25,7 @@ export default function LoginForm({ onLogin }) {
       const data = await res.json();
       localStorage.setItem('token', data.token);
       onLogin && onLogin();
-      navigate('/React-Week5/profile');
+      navigate('/React-Week5'); // 홈으로 이동
     } catch (err) {
       setError('이메일 또는 비밀번호가 올바르지 않습니다.');
     } finally {
@@ -33,13 +34,36 @@ export default function LoginForm({ onLogin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card form-card">
-      <h2 className="section-title">
-        로그인</h2>
-      <input className="form-input" type="email" placeholder="이메일" value={email} onChange={e => setEmail(e.target.value)} required />
-      <input className="form-input" type="password" placeholder="비밀번호" value={password} onChange={e => setPassword(e.target.value)} required />
-      <button className="button button-strong full-width-button" type="submit" disabled={loading}>로그인</button>
-      {error && <div className="form-error">{error}</div>}
-    </form>
+    <div className="login-container">
+      <div className="login-card">
+        <h1 className="login-logo">당근마켓</h1>
+        <form onSubmit={handleSubmit} className="login-form">
+          <input 
+            className="login-input" 
+            type="email" 
+            placeholder="이메일" 
+            value={email} 
+            onChange={e => setEmail(e.target.value)} 
+            required 
+          />
+          <input 
+            className="login-input" 
+            type="password" 
+            placeholder="비밀번호" 
+            value={password} 
+            onChange={e => setPassword(e.target.value)} 
+            required 
+          />
+          <button className="login-button" type="submit" disabled={loading}>
+            {loading ? '로그인 중...' : '로그인'}
+          </button>
+          {error && <div className="login-error">{error}</div>}
+        </form>
+        <div className="signup-link">
+          아직 계정이 없으신가요? 
+          <Link to="/React-Week5/signup">회원가입</Link>
+        </div>
+      </div>
+    </div>
   );
 }
